@@ -11,6 +11,7 @@ add_subdirectory (data-structure)
 add_subdirectory (file-process)
 add_subdirectory (statistics)
 add_subdirectory (encode)
+add_subdirectory (decode)
 
 
 # 预处理器选项

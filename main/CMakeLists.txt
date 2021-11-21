@@ -14,6 +14,7 @@ target_link_libraries(main data-structure)
 target_link_libraries(main file-process)
 target_link_libraries(main statistics)
 target_link_libraries(main encode)
+target_link_libraries(main decode)
 
 target_compile_options(main PRIVATE -fexec-charset=GBK)
 

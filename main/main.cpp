@@ -4,6 +4,7 @@
 #include "main.h"
 #include "../statistics/statistics.h"
 #include "../encode/encode.h"
+#include "../decode/decode.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ void menu()
             system("pause");
             break;
         case '3':
-            cout << "3" << endl;
+            Decode::decode_process();
             system("pause");
             break;
         case '4':
@@ -49,9 +50,10 @@ void showMenu()
         "\tHuffman编码器\n"
         "\t操作命令说明：\n"
         "\t[1]: 统计输入文件字符频度并对字符集编括码并输出至文件（基本要求）\n"
-        "\t[2]: 对整个文件编括码并保存结果到一个二进制文件（中级要求）\n"
+        "\t[2]: 对整个文件编码并保存结果到一个二进制文件（中级要求）\n"
         "\t[3]: 文件解码并将解码结果保存为一文本文件（高级要求）\n"
-        "\t[4]: 退出";
+        "\t[4]: 退出\n\n"
+        "\t注意：第3步解码操作需要同时用到第1步得到的统计结果文件，与第2步得到的编码结果文件\n";
     system("cls");
     printf("%s\n", show_menu_str);
 }

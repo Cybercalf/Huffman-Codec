@@ -129,6 +129,9 @@ public:
 		else if (((LeafNode<E>*)root)->val() == '\n') {
 			printStr = "\\n";
 		}
+		else if (((LeafNode<E>*)root)->val() == '\t') {
+			printStr = "\\t";
+		}
 		else {
 			printStr.push_back(((LeafNode<E>*)root)->val());
 		}
@@ -151,6 +154,9 @@ public:
 		}
 		else if (((LeafNode<E>*)root)->val() == '\n') {
 			printStr = "\\n";
+		}
+		else if (((LeafNode<E>*)root)->val() == '\t') {
+			printStr = "\\t";
 		}
 		else {
 			printStr.push_back(((LeafNode<E>*)root)->val());
