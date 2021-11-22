@@ -87,12 +87,17 @@ public:
 	HuffNode<E>* root() { return Root; }	//返回根节点
 	int weight() { return Root->weight(); } //返回权重
 
-	// 从所有树中选出权重最小的两颗(m1为最小的,m2为第二小的)
-	//template <typename E>
+	/*
+	* 从所有树中选出权重最小的两颗
+	* t为HuffTree数组,即在建树过程中的形成的森林
+	* m1,m2用于存放权重最小的两棵树m1为最小的那颗
+	* n为HuffTree数组的大小
+	*/
 	static void chose_min2(HuffTree<E>** t, int& m1, int& m2, int n)
 	{
 		m1 = 0;
 		m2 = 0;
+		//遍历数组找出最小的那棵树
 		int temp = t[0]->weight();
 		for (int i = 0; i < n; i++)
 		{
@@ -102,6 +107,7 @@ public:
 				m1 = i;
 			}
 		}
+		//第二遍遍历找出最小的第二颗
 		if (m1 == 0)
 		{
 			temp = t[1]->weight();
@@ -131,11 +137,13 @@ public:
 		HuffTree<char>* ttree[NUMBER];
 		HuffTree<char>* temp;
 
+		//遍历s,w构造n棵HuffTree
 		for (int i = 0; i < n; i++)
 		{
 			ttree[i] = new HuffTree<char>(s[i], w[i]);
 		}
 
+		//重复合并权重最小的两棵树,直至只剩下一棵树
 		while (n > 1)
 		{
 			n--;
@@ -148,6 +156,7 @@ public:
 				ttree[i] = ttree[i + 1];
 			}
 		}
+		//返回剩下的那棵树,即建好的树
 		return ttree[0];
 	}
 
@@ -158,9 +167,11 @@ public:
 	*/
 	static void printHuffmanCode(HuffNode<char>* root, string s = "")
 	{
+		// 为空直接return
 		if (root == NULL)
 			return;
 		string printStr = "";
+		// 下面是对一些特殊字符串进行处理, 避免打印时打乱格式
 		if (((LeafNode<char> *)root)->val() == ' ')
 		{
 			printStr = "<space>";
@@ -177,11 +188,13 @@ public:
 		{
 			printStr.push_back(((LeafNode<char> *)root)->val());
 		}
+		// 遇到叶子节点就打印其中储存的字符，权重，编码结果
 		if (root->isLeaf())
 		{
 			cout << printStr << "\t" << root->weight() << "\t" << s << endl;
 			return;
 		}
+		//递归访问左右孩子
 		HuffTree<char>::printHuffmanCode(((IntlNode<char> *)root)->left(), s + "0");
 		HuffTree<char>::printHuffmanCode(((IntlNode<char> *)root)->right(), s + "1");
 	}
@@ -196,6 +209,7 @@ public:
 			return "";
 		string ret = "";
 		string printStr = "";
+		// 下面是对一些特殊字符串进行处理, 避免打印时打乱格式
 		if (((LeafNode<char> *)root)->val() == ' ')
 		{
 			printStr = "<space>";

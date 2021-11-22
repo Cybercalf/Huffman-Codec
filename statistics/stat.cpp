@@ -8,13 +8,13 @@
 * content: 用于统计的字符串
 */
 void Stat(char* s, int* w, int& num, std::string content) {
-	//初始化
+	//初始化,将s与w的值全部置为0
 	num = 0;
 	for (int i = 0; i < NUMBER; i++) {
 		w[i] = 0;
 		s[i] = 0;
 	}
-	//遍历内容,统计频度
+	//遍历内容,统计各个字符频度
 	for (int i = 0; i < content.length(); i++) {
 		char ch = content[i];
 		w[ch]++;
