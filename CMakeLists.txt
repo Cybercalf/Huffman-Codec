@@ -13,7 +13,6 @@ add_subdirectory (statistics)
 add_subdirectory (encode)
 add_subdirectory (decode)
 
-
 # 预处理器选项
 add_definitions(-std=c++11)
 add_definitions(_CRT_SECURE_NO_WARNINGS)

@@ -56,7 +56,7 @@ namespace Encode {
             Stat(s, w, num, file_content);
 
             /*根据统计结果建树*/
-            HuffTree<char>* tree = HuffTree<char>::HuffmanBuild<char>(s, w, num);
+            HuffTree<char>* tree = HuffTree<char>::HuffmanBuild(s, w, num);
 
             /*将文件内容编码*/
             unordered_map<char, std::string> encode_map;
@@ -81,6 +81,8 @@ namespace Encode {
             printf("\n压缩率计算：\n压缩前大小：%d B\n压缩后大小：%.0f B\n压缩率：%.2f %%\n",
                 before_encode, after_encode, after_encode * 100.0 / before_encode);
 
+            /*清理huffman树，释放内存*/
+            delete tree;
         }
 	}
 

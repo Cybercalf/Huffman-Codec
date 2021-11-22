@@ -57,11 +57,11 @@ namespace Statistics
             Stat(s, w, num, file_content);
 
             /*根据统计结果建树*/
-            HuffTree<char>* tree = HuffTree<char>::HuffmanBuild<char>(s, w, num);
+            HuffTree<char>* tree = HuffTree<char>::HuffmanBuild(s, w, num);
 
             /*根据树生成统计结果并打印到控制台*/
             printf("%s", "统计结果：\n字符\t频度\t对应编码\n");
-            HuffTree<char>::printHuffmanCode<char>(tree->root());
+            HuffTree<char>::printHuffmanCode(tree->root());
 
             /*将生成的统计结果以文本形式存入指定文件*/
             string stat_result = to_string(file_content.length()) + "\n"; // 先存原文件的字符数量
@@ -71,6 +71,9 @@ namespace Statistics
             if (FileProcess::writeTextContent(stat_result, output_path.c_str())) {
                 printf("\n统计完成，统计结果已存入：%s\n\n", output_path.c_str());
             }
+
+            /*清理huffman树，释放内存*/
+            delete tree;
         }
     }
 }
