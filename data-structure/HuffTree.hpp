@@ -95,7 +95,12 @@ public:
 		}
 	}
 
-	//建树
+	/*
+	* 根据字符集、频度集、字符总数来构建Huffman编码树
+	* s: 字符集，记录出现过的字符
+	* w: 频度集，记录字符出现的频度
+	* n: 记录出现过的字符数量
+	*/
 	template <typename E>
 	static HuffTree<E>* HuffmanBuild(char* s, int* w, int n) {
 		HuffTree<E>* ttree[NUMBER];
@@ -118,9 +123,13 @@ public:
 		return ttree[0];
 	}
 
-	// 在控制台打印编码后的结果
+	/*
+	* 遍历Huffman编码树，在控制台打印统计与编码映射表
+	* root: 树的根节点
+	* s: 二进制编码信息字符串，由0和1字符构成，用于递归
+	*/
 	template <typename E>
-	static void printHuffmanCode(HuffNode<E>* root, string s) {
+	static void printHuffmanCode(HuffNode<E>* root, string s = "") {
 		if (root == NULL) return;
 		string printStr = "";
 		if (((LeafNode<E>*)root)->val() == ' ') {
@@ -144,8 +153,10 @@ public:
 	}
 
 	// 得到编码结果，用于在基本要求中写入到文件
+	// root: 树的根节点
+	// s: 二进制编码信息字符串，由0和1字符构成，用于递归
 	// return: 编码结果，是一个长字符串
-	static string huffmanCode(HuffNode<char>* root, string s) {
+	static string huffmanCode(HuffNode<char>* root, string s = "") {
 		if (root == NULL) return "";
 		string ret = "";
 		string printStr = "";
@@ -174,7 +185,9 @@ public:
 
 	/*
 	* 用map存储huffman编码的结果
-	* 
+	* root: 树的根节点
+	* code_map: 从字符到01字符串的映射表
+	* s: 二进制编码信息字符串，由0和1字符构成，用于递归
 	*/
 	static void storeHuffmanCode(HuffNode<char>* root, 
 		unordered_map<char, std::string>& code_map, string s = "")

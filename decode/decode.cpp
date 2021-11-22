@@ -1,16 +1,26 @@
 #pragma once
 #include "decode.h"
 #include <unordered_map>
+#include "../file-process/file-process.h"
+#include <iostream>
+#include <string>
 #define NUMBER 128
 
 using namespace std;
 
 namespace Decode {
 
-	//将01字符串解码为原来的字符串
+
+	/*
+	* 将01字符串解码为原来的字符串
+	* binCode: 存储二进制信息的字符串，由0和1字符构成
+	* map: 从二进制信息字符串到字符的映射表
+	* num: 原文件中的字符总数
+	*/
 	string binToString(string binCode, unordered_map<string, char>& map, int num) {
 		string code = "";
 		string result = "";
+		/*用类似于队列的方式处理binCode*/
 		for (int i = 0; (num > 0) && (i < binCode.length()); i++) {
 			code += binCode[i];
 			try {
@@ -37,7 +47,7 @@ namespace Decode {
 		unordered_map<string, char> decode_map; // 解码用的哈希表
 
 		/*变量初始化阶段*/
-		file_path_result = FileProcess::getFilePath("选择编码结果文件", BINARY_MODE);
+		file_path_result = FileProcess::getFilePath("选择编码结果文件", BINARY_MODE); // 获取用户所选**_result.huf文件的路径
 		int suffix_index = file_path_result.find("_result.huf"); // 字符串后缀名部分的下标，切割用
 		file_path_code = file_path_result.substr(0, suffix_index) + "_code.txt";
 		if (file_path_result.compare("NONE") == 0) {
@@ -54,6 +64,9 @@ namespace Decode {
 			MessageBox(NULL, TEXT(error_message.c_str()),
 				NULL, MB_ICONERROR); // 弹出错误提示对话框
 		}
+		/*
+		* 读取文件全部正常的情况下，进行解码步骤
+		*/
 		else {
 			printf("%s", "\n读取二进制文件成功\n读取统计结果文件成功\n正在解码...\n");
 			// 从**_result.huf中读取内容，存入字符串

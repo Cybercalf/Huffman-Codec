@@ -1,5 +1,8 @@
 #pragma once
 #include "../file-process/file-process.h"
+#include "../data-structure/HuffTree.hpp"
+#include <unordered_map>
+#include <math.h>
 #include <iostream>
 #include <string>
 #define NUMBER 128

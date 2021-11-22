@@ -1,4 +1,4 @@
-﻿// main.cpp
+﻿// main.cpp: 程序入口点和main()所在位置
 //
 
 #include "main.h"
@@ -10,16 +10,17 @@ using namespace std;
 
 void menu()
 {
-    
     bool exit_sig = false; // 程序退出的标志
+    /*开始循环*/
     while (!exit_sig)
     {
+        /*等待用户按键*/
         while (!_kbhit())
         {
             showMenu();
             Sleep(800);
         }
-
+        /*根据用户按键决定调用的函数*/
         switch (_getch())
         {
         case '1':

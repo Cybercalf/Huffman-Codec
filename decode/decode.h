@@ -1,7 +1,5 @@
 #pragma once
-#include "../file-process/file-process.h"
-#include <iostream>
-#include <string>
+
 #define NUMBER 128
 
 using namespace std;
