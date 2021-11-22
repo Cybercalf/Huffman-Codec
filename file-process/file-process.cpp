@@ -127,10 +127,12 @@ namespace FileProcess {
 		unsigned char ch = '\0';
 		ifstream infile;
 		infile.open(filepath, ios::in | ios::binary);
-		while (infile.read((char*)&ch, sizeof(ch))) {
-			ret += intToBinString(ch);
+		if (infile) { // 若文件正常打开
+			while (infile.read((char*)&ch, sizeof(ch))) {
+				ret += intToBinString(ch);
+			}
+			infile.close();
 		}
-
 		return ret;
 	}
 
