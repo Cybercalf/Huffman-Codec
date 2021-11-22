@@ -14,7 +14,7 @@ namespace FileProcess {
 			ofn.lpstrInitialDir = NULL;											  //初始目录为默认
 			ofn.lpstrTitle = TEXT(title); // 对话框标题
 			ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY; //文件、目录必须存在，隐藏只读选项
-			ofn.lpstrFilter = TEXT("文本文件(*.txt)\0*.txt\0二进制文件(*.huf)\0*.huf\0所有文件(*.*)\0*.*\0\0"); //文件选择过滤器
+			ofn.lpstrFilter = TEXT("text files(*.txt)\0*.txt\0binary files(*.huf)\0*.huf\0all files(*.*)\0*.*\0\0"); //文件选择过滤器
 			ofn.nFilterIndex = filter_mode;												  //过滤器索引
 
 			//打开文件对话框

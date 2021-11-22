@@ -24,15 +24,15 @@ void menu()
         switch (_getch())
         {
         case '1':
-            Statistics::statistics_process();
+            statistics_process();
             system("pause");
             break;
         case '2':
-            Encode::encode_process();
+            encode_process();
             system("pause");
             break;
         case '3':
-            Decode::decode_process();
+            decode_process();
             system("pause");
             break;
         case '4':

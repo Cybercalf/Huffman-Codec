@@ -3,6 +3,10 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
+include_directories(${PROJECT_SOURCE_DIR}/statistics)
+include_directories(${PROJECT_SOURCE_DIR}/encode)
+include_directories(${PROJECT_SOURCE_DIR}/decode)
+
 # 让生成的二进制可执行文件放到使用cmake的目录下的bin文件夹中
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 # 给该目录下的所有源文件起一个别名
