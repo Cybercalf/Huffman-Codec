@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("HuffmanDecoder-Cmake")
+project ("Huffman-Codec")
 
 # 包含子项目。
 add_subdirectory (main)
