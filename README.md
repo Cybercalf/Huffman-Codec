@@ -26,7 +26,7 @@
 
 ### 鸣谢
 
-全部工作由胡未名(https://github.com/Cybercalf)和李郭华(https://github.com/White-Prostitute)共同完成，同时感谢马扬(379051737@qq.com)提供思路上的帮助，3人全部来自四川大学软件学院2020级8班
+全部工作由胡未名（https://github.com/Cybercalf）和李郭华（https://github.com/White-Prostitute）共同完成，同时感谢马扬（379051737@qq.com）提供思路上的帮助，3人全部来自四川大学软件学院2020级8班
 
 ### 其他
 
