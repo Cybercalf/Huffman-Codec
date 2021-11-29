@@ -1,4 +1,4 @@
-# Huffman Codec
+# Huffman-Codec
 
 基于Huffman编码的简易文本文件编解码器，适用于Windows 64位平台
 
@@ -22,13 +22,15 @@
 
 ### 背景
 
-本项目为四川大学2021-2022学年秋数据结构与算法课程第二个实验的小组成果，验收完成于2021年11月29日。
+本项目为四川大学2021-2022学年秋数据结构与算法课程第二个实验的小组成果，验收完成于2021年11月29日上午10:30-11:00。
 
 ### 鸣谢
 
-全部工作由胡未名（https://github.com/Cybercalf）和李郭华（https://github.com/White-Prostitute）共同完成，同时感谢马扬（379051737@qq.com）提供思路上的帮助，3人全部来自四川大学软件学院2020级8班
+全部工作由[李郭华](https://github.com/White-Prostitute)和[胡未名](https://github.com/Cybercalf)共同完成，同时感谢[马扬](mailto:379051737@qq.com)提供思路上的帮助
+
+3人全部来自[四川大学](https://scu.edu.cn/index.htm)[软件学院](https://sw.scu.edu.cn/)2020级
 
 ### 其他
 
 1. 项目文档位于`doc`文件夹中
-2. 项目仅供学习交流使用，请遵循GPLv3协议
+2. 项目仅供学习交流使用，请遵循[GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)协议
