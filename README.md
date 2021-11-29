@@ -26,9 +26,9 @@
 
 ### 鸣谢
 
-全部工作由[李郭华](https://github.com/White-Prostitute)和[胡未名](https://github.com/Cybercalf)共同完成，同时感谢[马扬](mailto:379051737@qq.com)提供思路上的帮助
+项目绝大部分工作由[李郭华](https://github.com/White-Prostitute)和[胡未名](https://github.com/Cybercalf)共同完成，[陈怡君](https://github.com/dobole)负责了win32 API函数调用相关代码的编写，同时感谢[马扬](mailto:379051737@qq.com)在二进制文件读写方面提供思路上的帮助。
 
-3人全部来自[四川大学](https://scu.edu.cn/index.htm)[软件学院](https://sw.scu.edu.cn/)2020级
+4人全部来自[四川大学](https://scu.edu.cn/index.htm)[软件学院](https://sw.scu.edu.cn/)2020级。
 
 ### 其他
 
