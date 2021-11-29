@@ -9,6 +9,6 @@ using namespace std;
 
 
 /*
-* ��ָ���ļ����벢�������������һ���������ļ����м�Ҫ�󣩵Ĺ���
+* 对指定文件编码并将编码结果输出到一个二进制文件（中级要求）的过程
 */
 void encode_process();

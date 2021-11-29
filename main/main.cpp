@@ -36,6 +36,8 @@ void menu()
             system("pause");
             break;
         case '4':
+            printf("%s\n", "Goodbye!");
+            system("pause");
             exit_sig = true;
             break;
         default:
@@ -50,7 +52,7 @@ void showMenu()
         "\n\n\n"
         "\tHuffman编码器\n"
         "\t操作命令说明：\n"
-        "\t[1]: 统计输入文件字符频度并对字符集编括码并输出至文件（基本要求）\n"
+        "\t[1]: 统计输入文件字符频度并对字符集编码并输出至文件（基本要求）\n"
         "\t[2]: 对整个文件编码并保存结果到一个二进制文件（中级要求）\n"
         "\t[3]: 文件解码并将解码结果保存为一文本文件（高级要求）\n"
         "\t[4]: 退出\n\n"

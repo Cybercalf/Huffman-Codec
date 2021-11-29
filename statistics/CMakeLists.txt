@@ -1,16 +1,15 @@
-# ÈÃÖ¸¶¨ÎÄ¼ş¼ĞÏÂµÄÍ·ÎÄ¼şÄÜ±»Õâ¸öÎÄ¼ş¼ĞÏÂµÄ³ÌĞòÕÒµ½
+# è®©æŒ‡å®šæ–‡ä»¶å¤¹ä¸‹çš„å¤´æ–‡ä»¶èƒ½è¢«è¿™ä¸ªæ–‡ä»¶å¤¹ä¸‹çš„ç¨‹åºæ‰¾åˆ°
 include_directories(${PROJECT_SOURCE_DIR}/data-structure)
 include_directories(${PROJECT_SOURCE_DIR}/file-process)
 
-# ½«Éú³ÉµÄ¶ş½øÖÆÁ´½Ó¿âÎÄ¼ş·Åµ½Ê¹ÓÃcmakeÎÄ¼ş¼ĞÏÂµÄlibÎÄ¼ş¼ĞÖĞ
+# å°†ç”Ÿæˆçš„äºŒè¿›åˆ¶é“¾æ¥åº“æ–‡ä»¶æ”¾åˆ°ä½¿ç”¨cmakeæ–‡ä»¶å¤¹ä¸‹çš„libæ–‡ä»¶å¤¹ä¸­
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-# ¸ø¸ÃÄ¿Â¼ÏÂµÄËùÓĞÔ´ÎÄ¼şÆğÒ»¸ö±ğÃû
+# ç»™è¯¥ç›®å½•ä¸‹çš„æ‰€æœ‰æºæ–‡ä»¶èµ·ä¸€ä¸ªåˆ«å
 aux_source_directory(./ DIR_LIB_SRCS)
-# ½«¸ÃÄ¿Â¼ÏÂµÄËùÓĞÔ´ÎÄ¼şÔÚÉú³É¶ş½øÖÆÁ´½Ó¿âÎÄ¼şÊ±±»Ê¹ÓÃ
+# å°†è¯¥ç›®å½•ä¸‹çš„æ‰€æœ‰æºæ–‡ä»¶åœ¨ç”ŸæˆäºŒè¿›åˆ¶é“¾æ¥åº“æ–‡ä»¶æ—¶è¢«ä½¿ç”¨
 add_library(statistics ${DIR_LIB_SRCS})
 
 target_link_libraries(statistics data-structure)
 target_link_libraries(statistics file-process)
 
-target_compile_options(statistics PRIVATE -finput-charset=GBK)
 target_compile_options(statistics PRIVATE -fexec-charset=GBK)

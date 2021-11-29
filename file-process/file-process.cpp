@@ -6,20 +6,20 @@ namespace FileProcess {
 	string getFilePath(const char* title, int filter_mode)
 		{
 			OPENFILENAME ofn = { 0 };
-			TCHAR strFileName[MAX_PATH] = { 0 };									  //ÓÃÓÚ½ÓÊÕÎÄ¼şÃû
-			ofn.lStructSize = sizeof(OPENFILENAME);								  //½á¹¹Ìå´óĞ¡
-			ofn.hwndOwner = NULL;												  //ÓµÓĞÕß´°¿Ú¾ä±ú
-			ofn.lpstrFile = strFileName;										  //½ÓÊÕ·µ»ØµÄÎÄ¼şÃû£¬×¢ÒâµÚÒ»¸ö×Ö·ûĞèÒªÎªNULL
-			ofn.nMaxFile = sizeof(strFileName);									  //»º³åÇø³¤¶È
-			ofn.lpstrInitialDir = NULL;											  //³õÊ¼Ä¿Â¼ÎªÄ¬ÈÏ
-			ofn.lpstrTitle = TEXT(title); // ¶Ô»°¿ò±êÌâ
-			ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY; //ÎÄ¼ş¡¢Ä¿Â¼±ØĞë´æÔÚ£¬Òş²ØÖ»¶ÁÑ¡Ïî
-			ofn.lpstrFilter = TEXT("text files(*.txt)\0*.txt\0binary files(*.huf)\0*.huf\0all files(*.*)\0*.*\0\0"); //ÎÄ¼şÑ¡Ôñ¹ıÂËÆ÷
-			ofn.nFilterIndex = filter_mode;												  //¹ıÂËÆ÷Ë÷Òı
+			TCHAR strFileName[MAX_PATH] = { 0 };									  //ç”¨äºæ¥æ”¶æ–‡ä»¶å
+			ofn.lStructSize = sizeof(OPENFILENAME);								  //ç»“æ„ä½“å¤§å°
+			ofn.hwndOwner = NULL;												  //æ‹¥æœ‰è€…çª—å£å¥æŸ„
+			ofn.lpstrFile = strFileName;										  //æ¥æ”¶è¿”å›çš„æ–‡ä»¶åï¼Œæ³¨æ„ç¬¬ä¸€ä¸ªå­—ç¬¦éœ€è¦ä¸ºNULL
+			ofn.nMaxFile = sizeof(strFileName);									  //ç¼“å†²åŒºé•¿åº¦
+			ofn.lpstrInitialDir = NULL;											  //åˆå§‹ç›®å½•ä¸ºé»˜è®¤
+			ofn.lpstrTitle = TEXT(title); // å¯¹è¯æ¡†æ ‡é¢˜
+			ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST | OFN_HIDEREADONLY; //æ–‡ä»¶ã€ç›®å½•å¿…é¡»å­˜åœ¨ï¼Œéšè—åªè¯»é€‰é¡¹
+			ofn.lpstrFilter = TEXT("text files(*.txt)\0*.txt\0binary files(*.huf)\0*.huf\0all files(*.*)\0*.*\0\0"); //æ–‡ä»¶é€‰æ‹©è¿‡æ»¤å™¨
+			ofn.nFilterIndex = filter_mode;												  //è¿‡æ»¤å™¨ç´¢å¼•
 
-			//´ò¿ªÎÄ¼ş¶Ô»°¿ò
-			string filePath = "NONE"; // ×Ö·û´®Ä¬ÈÏÖµÎªNONE
-			if (GetOpenFileName(&ofn)) // ÈôÎÄ¼şÕı³£´ò¿ª£¬·µ»ØµÃµ½µÄÎÄ¼şÂ·¾¶
+			//æ‰“å¼€æ–‡ä»¶å¯¹è¯æ¡†
+			string filePath = "NONE"; // å­—ç¬¦ä¸²é»˜è®¤å€¼ä¸ºNONE
+			if (GetOpenFileName(&ofn)) // è‹¥æ–‡ä»¶æ­£å¸¸æ‰“å¼€ï¼Œè¿”å›å¾—åˆ°çš„æ–‡ä»¶è·¯å¾„
 			{
 				filePath = (string)strFileName;
 			}
@@ -28,11 +28,11 @@ namespace FileProcess {
 
 	string readTextContent(const char* filepath)
 	{
-		/*ÒÔÎÄ±¾Ö»¶Á·½Ê½´ò¿ªÎÄ¼ş*/
+		/*ä»¥æ–‡æœ¬åªè¯»æ–¹å¼æ‰“å¼€æ–‡ä»¶*/
 		FILE* infile = fopen(filepath, "r");
 		string str = "";
 		char ch = '\0';
-		/*ÈôÕı³£´ò¿ªÎÄ¼ş£¬Ôò±éÀúÎÄ¼şÄÚÈİ²¢¼ÇÂ¼*/
+		/*è‹¥æ­£å¸¸æ‰“å¼€æ–‡ä»¶ï¼Œåˆ™éå†æ–‡ä»¶å†…å®¹å¹¶è®°å½•*/
 		if (infile != NULL)
 		{
 			while (!feof(infile))
@@ -65,7 +65,7 @@ namespace FileProcess {
 		ifstream infile;
 		string binstr = "", chstr = "";
 		infile.open(filepath, ios::in);
-		// ÈôÎÄ¼şÕı³£´ò¿ª
+		// è‹¥æ–‡ä»¶æ­£å¸¸æ‰“å¼€
 		if (infile) {
 			infile >> num_of_file_ch;
 			if (num_of_file_ch != 0) {
@@ -88,15 +88,15 @@ namespace FileProcess {
 			infile.close();
 			return true;
 		}
-		// ÈôÎÄ¼şÎ´Õı³£´ò¿ª
+		// è‹¥æ–‡ä»¶æœªæ­£å¸¸æ‰“å¼€
 		else {
 			return false;
 		}
 	}
 
 	/*
-	* ½«³¤¶ÈÎª8µÄ¶ş½øÖÆĞÅÏ¢×Ö·û´®×ªÎªÏàÓ¦µÄÕûÊı
-	* hex: ¶ş½øÖÆĞÅÏ¢×Ö·û´®£¬ÓÉ0ºÍ1×Ö·û¹¹³É£¬³¤¶ÈÎª8
+	* å°†é•¿åº¦ä¸º8çš„äºŒè¿›åˆ¶ä¿¡æ¯å­—ç¬¦ä¸²è½¬ä¸ºç›¸åº”çš„æ•´æ•°
+	* hex: äºŒè¿›åˆ¶ä¿¡æ¯å­—ç¬¦ä¸²ï¼Œç”±0å’Œ1å­—ç¬¦æ„æˆï¼Œé•¿åº¦ä¸º8
 	*/
 	int binStringToInt(string hex)
 	{
@@ -104,16 +104,16 @@ namespace FileProcess {
 	}
 
 	/*
-	* ½«Ò»×Ö½Ú´óĞ¡µÄĞÅÏ¢×ªÎª³¤¶ÈÎª8µÄ¶ş½øÖÆĞÅÏ¢×Ö·û´®
-	* ch: Ò»×Ö½Ú´óĞ¡µÄ¶ş½øÖÆĞÅÏ¢
-	* return: ¶ş½øÖÆĞÅÏ¢×Ö·û´®£¬ÓÉ0ºÍ1×Ö·û¹¹³É£¬³¤¶ÈÎª8
+	* å°†ä¸€å­—èŠ‚å¤§å°çš„ä¿¡æ¯è½¬ä¸ºé•¿åº¦ä¸º8çš„äºŒè¿›åˆ¶ä¿¡æ¯å­—ç¬¦ä¸²
+	* ch: ä¸€å­—èŠ‚å¤§å°çš„äºŒè¿›åˆ¶ä¿¡æ¯
+	* return: äºŒè¿›åˆ¶ä¿¡æ¯å­—ç¬¦ä¸²ï¼Œç”±0å’Œ1å­—ç¬¦æ„æˆï¼Œé•¿åº¦ä¸º8
 	*/
 	string intToBinString(unsigned char ch)
 	{
 		string ret = "";
 		unsigned int num = ch;
 
-		// ×Ö·û´®µÄ³¤¶ÈÊÇ8Î»
+		// å­—ç¬¦ä¸²çš„é•¿åº¦æ˜¯8ä½
 		while (ret.length() < 8) {
 			ret = to_string(num % 2) + ret;
 			num = num >> 1;
@@ -127,7 +127,7 @@ namespace FileProcess {
 		unsigned char ch = '\0';
 		ifstream infile;
 		infile.open(filepath, ios::in | ios::binary);
-		if (infile) { // ÈôÎÄ¼şÕı³£´ò¿ª
+		if (infile) { // è‹¥æ–‡ä»¶æ­£å¸¸æ‰“å¼€
 			while (infile.read((char*)&ch, sizeof(ch))) {
 				ret += intToBinString(ch);
 			}
@@ -145,12 +145,12 @@ namespace FileProcess {
 		}
 		else
 		{
-			// ²¹Æë°ËÎ»
+			// è¡¥é½å…«ä½
 			while (binary_content.length() % 8 != 0)
 			{
 				binary_content += "0";
 			}
-			// ×ªÎª¶ş½øÖÆÊı´æÈëÎÄµµ
+			// è½¬ä¸ºäºŒè¿›åˆ¶æ•°å­˜å…¥æ–‡æ¡£
 			while (!binary_content.empty())
 			{
 				unsigned char ch = binStringToInt(binary_content.substr(0, 8));

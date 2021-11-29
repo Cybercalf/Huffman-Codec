@@ -9,51 +9,51 @@ using namespace std;
 
 
 void encode_process() {
-	/* ´ÓÎÄ¼şÖĞ»ñÈ¡ĞÅÏ¢´æÈëÒ»¸ö×Ö·û´® */
-	static string file_path = ""; // ´æ´¢ÎÄ¼şÂ·¾¶
-	static string file_content = ""; // ´æ´¢ÎÄ¼şÄÚÈİ
-	file_path = FileProcess::getFilePath("Ñ¡ÔñÔ­ÎÄ¼ş", TEXT_MODE); // »ñÈ¡ÓÃ»§ËùÑ¡ÎÄ¼şµÄÂ·¾¶
-	if (file_path.compare("NONE") == 0) { // Èç¹ûÓÃ»§Ã»ÓĞÑ¡ÔñÎÄ¼ş
-		MessageBox(NULL, TEXT("Ã»ÓĞÑ¡ÔñÎÄ±¾ÎÄ¼ş£¬ÎŞ·¨±àÂë"),
-			NULL, MB_ICONERROR); // µ¯³ö´íÎóÌáÊ¾¶Ô»°¿ò
+	/* ä»æ–‡ä»¶ä¸­è·å–ä¿¡æ¯å­˜å…¥ä¸€ä¸ªå­—ç¬¦ä¸² */
+	static string file_path = ""; // å­˜å‚¨æ–‡ä»¶è·¯å¾„
+	static string file_content = ""; // å­˜å‚¨æ–‡ä»¶å†…å®¹
+	file_path = FileProcess::getFilePath("é€‰æ‹©åŸæ–‡ä»¶", TEXT_MODE); // è·å–ç”¨æˆ·æ‰€é€‰æ–‡ä»¶çš„è·¯å¾„
+	if (file_path.compare("NONE") == 0) { // å¦‚æœç”¨æˆ·æ²¡æœ‰é€‰æ‹©æ–‡ä»¶
+		MessageBox(NULL, TEXT("æ²¡æœ‰é€‰æ‹©æ–‡æœ¬æ–‡ä»¶ï¼Œæ— æ³•ç¼–ç "),
+			NULL, MB_ICONERROR); // å¼¹å‡ºé”™è¯¯æç¤ºå¯¹è¯æ¡†
 	}
-	else { // Èç¹ûÓÃ»§Õı³£Ñ¡ÔñÎÄ¼ş
-		printf("\nÑ¡ÔñÎÄ¼ş£º%s\n\nÕıÔÚ±àÂë...\n", file_path.c_str());
-		file_content = FileProcess::readTextContent(file_path.c_str()); // ¶ÁÈ¡ÎÄ¼şÖĞµÄÈ«²¿ÄÚÈİ£¬´æÈë×Ö·û´®
+	else { // å¦‚æœç”¨æˆ·æ­£å¸¸é€‰æ‹©æ–‡ä»¶
+		printf("\né€‰æ‹©æ–‡ä»¶ï¼š%s\n\næ­£åœ¨ç¼–ç ...\n", file_path.c_str());
+		file_content = FileProcess::readTextContent(file_path.c_str()); // è¯»å–æ–‡ä»¶ä¸­çš„å…¨éƒ¨å†…å®¹ï¼Œå­˜å…¥å­—ç¬¦ä¸²
 
-		/* ±éÀú×Ö·û´®À´Í³¼ÆÃ¿Ò»¸ö×Ö·ûµÄ³öÏÖÆµ¶È */
+		/* éå†å­—ç¬¦ä¸²æ¥ç»Ÿè®¡æ¯ä¸€ä¸ªå­—ç¬¦çš„å‡ºç°é¢‘åº¦ */
 		char s[NUMBER];
 		int w[NUMBER];
 		int num;
 		Stat(s, w, num, file_content);
 
-		/*¸ù¾İÍ³¼Æ½á¹û½¨Ê÷*/
+		/*æ ¹æ®ç»Ÿè®¡ç»“æœå»ºæ ‘*/
 		HuffTree<char>* tree = HuffTree<char>::HuffmanBuild(s, w, num);
 
-		/*½«ÎÄ¼şÄÚÈİ±àÂë*/
+		/*å°†æ–‡ä»¶å†…å®¹ç¼–ç */
 		unordered_map<char, std::string> encode_map;
 		HuffTree<char>::storeHuffmanCode(tree->root(), encode_map);
 		string encode_str = "";
-		/*±éÀúÎÄ¼şÄÚÈİ×Ö·û´®£¬°ÑÃ¿Ò»¸ö×Ö·ûÓ³Éä³É¶ÔÓ¦µÄhuffman±àÂë£¬´æÈë±àÂëÄÚÈİ×Ö·û´®*/
+		/*éå†æ–‡ä»¶å†…å®¹å­—ç¬¦ä¸²ï¼ŒæŠŠæ¯ä¸€ä¸ªå­—ç¬¦æ˜ å°„æˆå¯¹åº”çš„huffmanç¼–ç ï¼Œå­˜å…¥ç¼–ç å†…å®¹å­—ç¬¦ä¸²*/
 		for (char& x : file_content) {
 			encode_str += encode_map.at(x);
 		}
 
-		/*½«±àÂë½á¹ûÒÔ¶ş½øÖÆ·½Ê½´æÈëÖ¸¶¨ÎÄ¼ş*/
+		/*å°†ç¼–ç ç»“æœä»¥äºŒè¿›åˆ¶æ–¹å¼å­˜å…¥æŒ‡å®šæ–‡ä»¶*/
 		size_t find = file_path.find(".txt");
 		string output_path = file_path.substr(0, find) + "_result.huf";
 
 		if (FileProcess::writeBinaryContent(encode_str, output_path.c_str())) {
-			printf("\n±àÂëÍê³É£¬±àÂë½á¹ûÒÑ´æÈë£º%s\n\n", output_path.c_str());
+			printf("\nç¼–ç å®Œæˆï¼Œç¼–ç ç»“æœå·²å­˜å…¥ï¼š%s\n\n", output_path.c_str());
 		}
 
-		/*Ñ¹ËõÂÊ¼ÆËã*/
+		/*å‹ç¼©ç‡è®¡ç®—*/
 		int before_encode = file_content.length();
 		double after_encode = ceil(encode_str.length() * 1.0 / 8);
-		printf("\nÑ¹ËõÂÊ¼ÆËã£º\nÑ¹ËõÇ°´óĞ¡£º%d B\nÑ¹Ëõºó´óĞ¡£º%.0f B\nÑ¹ËõÂÊ£º%.2f %%\n",
+		printf("\nå‹ç¼©ç‡è®¡ç®—ï¼š\nå‹ç¼©å‰å¤§å°ï¼š%d B\nå‹ç¼©åå¤§å°ï¼š%.0f B\nå‹ç¼©ç‡ï¼š%.2f %%\n",
 			before_encode, after_encode, after_encode * 100.0 / before_encode);
 
-		/*ÇåÀíhuffmanÊ÷£¬ÊÍ·ÅÄÚ´æ*/
+		/*æ¸…ç†huffmanæ ‘ï¼Œé‡Šæ”¾å†…å­˜*/
 		delete tree;
 	}
 }

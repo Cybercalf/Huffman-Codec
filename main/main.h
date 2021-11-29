@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <Windows.h>
 #include <conio.h>
 #include <stdlib.h>

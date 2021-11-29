@@ -16,12 +16,7 @@ string binToString(string binCode, unordered_map<string, char>& map, int num) {
 	string result = ""; // 存放最终解码的结果
 	/*用类似于队列的方式处理binCode*/
 	for (int i = 0; (num > 0) && (i < binCode.length()); i++) {
-		code += binCode[i]; // 从01字符串中取出一个放入code中
-		/*
-		* 在map中查找是否有编码为code的字符, 若有则放入最终结果中,并将code重置
-		* 若没有找到,就在保存code的值在进入下一次循环
-		* 注意 ： 因为map的at函数若没有找到结果是会抛出异常的,所以要使用try,catch处理这个异常
-		*/
+		code += binCode[i];
 		try {
 			result += map.at(code);
 			num--;

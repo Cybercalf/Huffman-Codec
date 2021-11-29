@@ -8,41 +8,41 @@
 
 void statistics_process()
 {
-	/* ´ÓÎÄ¼şÖĞ»ñÈ¡ĞÅÏ¢´æÈë×Ö·û´® */
-	static string file_path = ""; // ´æ´¢ÎÄ¼şÂ·¾¶
-	static string file_content = ""; // ´æ´¢ÎÄ¼şÄÚÈİ
-	file_path = FileProcess::getFilePath("Ñ¡ÔñÔ­ÎÄ¼ş", TEXT_MODE); // »ñÈ¡ÓÃ»§ËùÑ¡ÎÄ¼şµÄÂ·¾¶
-	if (file_path.compare("NONE") == 0) { // Èç¹ûÓÃ»§Ã»ÓĞÑ¡ÔñÎÄ¼ş
-		MessageBox(NULL, TEXT("Ã»ÓĞÑ¡ÔñÎÄ±¾ÎÄ¼ş£¬ÎŞ·¨Í³¼Æ"),
-			NULL, MB_ICONERROR); // µ¯³ö´íÎóÌáÊ¾¶Ô»°¿ò
+	/* ä»æ–‡ä»¶ä¸­è·å–ä¿¡æ¯å­˜å…¥å­—ç¬¦ä¸² */
+	static string file_path = ""; // å­˜å‚¨æ–‡ä»¶è·¯å¾„
+	static string file_content = ""; // å­˜å‚¨æ–‡ä»¶å†…å®¹
+	file_path = FileProcess::getFilePath("é€‰æ‹©åŸæ–‡ä»¶", TEXT_MODE); // è·å–ç”¨æˆ·æ‰€é€‰æ–‡ä»¶çš„è·¯å¾„
+	if (file_path.compare("NONE") == 0) { // å¦‚æœç”¨æˆ·æ²¡æœ‰é€‰æ‹©æ–‡ä»¶
+		MessageBox(NULL, TEXT("æ²¡æœ‰é€‰æ‹©æ–‡æœ¬æ–‡ä»¶ï¼Œæ— æ³•ç»Ÿè®¡"),
+			NULL, MB_ICONERROR); // å¼¹å‡ºé”™è¯¯æç¤ºå¯¹è¯æ¡†
 	}
-	else { // Èç¹ûÓÃ»§Õı³£Ñ¡ÔñÎÄ¼ş
-		printf("\nÑ¡ÔñÎÄ¼ş£º%s\n\n", file_path.c_str());
-		file_content = FileProcess::readTextContent(file_path.c_str()); // ¶ÁÈ¡ÎÄ¼şÖĞµÄÈ«²¿ÄÚÈİ£¬´æÈë×Ö·û´®
+	else { // å¦‚æœç”¨æˆ·æ­£å¸¸é€‰æ‹©æ–‡ä»¶
+		printf("\né€‰æ‹©æ–‡ä»¶ï¼š%s\n\n", file_path.c_str());
+		file_content = FileProcess::readTextContent(file_path.c_str()); // è¯»å–æ–‡ä»¶ä¸­çš„å…¨éƒ¨å†…å®¹ï¼Œå­˜å…¥å­—ç¬¦ä¸²
 
-		/* ±éÀú×Ö·û´®À´Í³¼ÆÃ¿Ò»¸ö×Ö·ûµÄ³öÏÖÆµ¶È */
+		/* éå†å­—ç¬¦ä¸²æ¥ç»Ÿè®¡æ¯ä¸€ä¸ªå­—ç¬¦çš„å‡ºç°é¢‘åº¦ */
 		char s[NUMBER];
 		int w[NUMBER];
 		int num;
 		Stat(s, w, num, file_content);
 
-		/*¸ù¾İÍ³¼Æ½á¹û½¨Ê÷*/
+		/*æ ¹æ®ç»Ÿè®¡ç»“æœå»ºæ ‘*/
 		HuffTree<char>* tree = HuffTree<char>::HuffmanBuild(s, w, num);
 
-		/*¸ù¾İÊ÷Éú³ÉÍ³¼Æ½á¹û²¢´òÓ¡µ½¿ØÖÆÌ¨*/
-		printf("%s", "Í³¼Æ½á¹û£º\n×Ö·û\tÆµ¶È\t¶ÔÓ¦±àÂë\n");
+		/*æ ¹æ®æ ‘ç”Ÿæˆç»Ÿè®¡ç»“æœå¹¶æ‰“å°åˆ°æ§åˆ¶å°*/
+		printf("%s", "ç»Ÿè®¡ç»“æœï¼š\nå­—ç¬¦\té¢‘åº¦\tå¯¹åº”ç¼–ç \n");
 		HuffTree<char>::printHuffmanCode(tree->root());
 
-		/*½«Éú³ÉµÄÍ³¼Æ½á¹ûÒÔÎÄ±¾ĞÎÊ½´æÈëÖ¸¶¨ÎÄ¼ş*/
-		string stat_result = to_string(file_content.length()) + "\n"; // ÏÈ´æÔ­ÎÄ¼şµÄ×Ö·ûÊıÁ¿
+		/*å°†ç”Ÿæˆçš„ç»Ÿè®¡ç»“æœä»¥æ–‡æœ¬å½¢å¼å­˜å…¥æŒ‡å®šæ–‡ä»¶*/
+		string stat_result = to_string(file_content.length()) + "\n"; // å…ˆå­˜åŸæ–‡ä»¶çš„å­—ç¬¦æ•°é‡
 		stat_result += HuffTree<char>::huffmanCode(tree->root());
 		size_t find = file_path.find(".txt");
 		string output_path = file_path.substr(0, find) + "_code.txt";
 		if (FileProcess::writeTextContent(stat_result, output_path.c_str())) {
-			printf("\nÍ³¼ÆÍê³É£¬Í³¼Æ½á¹ûÒÑ´æÈë£º%s\n\n", output_path.c_str());
+			printf("\nç»Ÿè®¡å®Œæˆï¼Œç»Ÿè®¡ç»“æœå·²å­˜å…¥ï¼š%s\n\n", output_path.c_str());
 		}
 
-		/*ÇåÀíhuffmanÊ÷£¬ÊÍ·ÅÄÚ´æ*/
+		/*æ¸…ç†huffmanæ ‘ï¼Œé‡Šæ”¾å†…å­˜*/
 		delete tree;
 	}
 }

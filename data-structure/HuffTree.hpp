@@ -10,23 +10,23 @@ template <typename E>
 class HuffNode
 {
 public:
-	~HuffNode() {};			   //»ù±¾Îö¹¹º¯Êı
-	virtual int weight() = 0;  //·µ»ØÆµ¶È
-	virtual bool isLeaf() = 0; //·µ»ØÊÇ·ñÊÇÒ¶×Ó½Úµã
+	~HuffNode() {};			   //åŸºæœ¬ææ„å‡½æ•°
+	virtual int weight() = 0;  //è¿”å›é¢‘åº¦
+	virtual bool isLeaf() = 0; //è¿”å›æ˜¯å¦æ˜¯å¶å­èŠ‚ç‚¹
 };
 
 template <typename E>
 class LeafNode : public HuffNode<E>
 {
 private:
-	E it;	 //Öµ
-	int wgt; //È¨ÖØ
+	E it;	 //å€¼
+	int wgt; //æƒé‡
 public:
 	LeafNode(const E& val, int freq)
 	{
 		it = val;
 		wgt = freq;
-	} //¹¹Ôìº¯Êı
+	} //æ„é€ å‡½æ•°
 	int weight() { return wgt; }
 	E val() { return it; }
 	bool isLeaf() { return true; }
@@ -36,22 +36,22 @@ template <typename E>
 class IntlNode : public HuffNode<E>
 {
 private:
-	HuffNode<E>* lc; //×óº¢×Ó
-	HuffNode<E>* rc; //ÓÒº¢×Ó
-	int wgt;		 //×óÓÒº¢×ÓµÄÈ¨ÖØÖ®ºÍ
+	HuffNode<E>* lc; //å·¦å­©å­
+	HuffNode<E>* rc; //å³å­©å­
+	int wgt;		 //å·¦å³å­©å­çš„æƒé‡ä¹‹å’Œ
 public:
 	IntlNode(HuffNode<E>* l, HuffNode<E>* r)
 	{
 		lc = l;
 		rc = r;
 		wgt = l->weight() + r->weight();
-	}														 //¹¹Ôìº¯Êı
-	int weight() { return wgt; }							 //·µ»ØÈ¨ÖØ
-	bool isLeaf() { return false; }							 //·µ»ØÊÇ·ñÎªÒ¶×Ó
-	HuffNode<E>* left() const { return lc; }				 //·µ»Ø×óº¢×Ó
-	HuffNode<E>* right() const { return rc; }				 //·µ»ØÓÒº¢×Ó
-	void setLeft(HuffNode<E>* b) { lc = (HuffNode<E> *)b; }	 //ÉèÖÃ×óº¢×Ó
-	void setRight(HuffNode<E>* b) { rc = (HuffNode<E> *)b; } //ÉèÖÃÓÒº¢×Ó
+	}														 //æ„é€ å‡½æ•°
+	int weight() { return wgt; }							 //è¿”å›æƒé‡
+	bool isLeaf() { return false; }							 //è¿”å›æ˜¯å¦ä¸ºå¶å­
+	HuffNode<E>* left() const { return lc; }				 //è¿”å›å·¦å­©å­
+	HuffNode<E>* right() const { return rc; }				 //è¿”å›å³å­©å­
+	void setLeft(HuffNode<E>* b) { lc = (HuffNode<E> *)b; }	 //è®¾ç½®å·¦å­©å­
+	void setRight(HuffNode<E>* b) { rc = (HuffNode<E> *)b; } //è®¾ç½®å³å­©å­
 };
 
 template <typename E>
@@ -59,19 +59,19 @@ class HuffTree
 {
 
 private:
-	HuffNode<E>* Root; //¸ù½Úµã
+	HuffNode<E>* Root; //æ ¹èŠ‚ç‚¹
 public:
-	HuffTree(E& val, int freq) { Root = new LeafNode<E>(val, freq); } //¹¹Ôìº¯Êı
-	HuffTree(HuffTree<E>* l, HuffTree<E>* r)						  //¹¹Ôìº¯Êı
+	HuffTree(E& val, int freq) { Root = new LeafNode<E>(val, freq); } //æ„é€ å‡½æ•°
+	HuffTree(HuffTree<E>* l, HuffTree<E>* r)						  //æ„é€ å‡½æ•°
 	{
 		Root = new IntlNode<E>(l->root(), r->root());
 	}
-	/*Îö¹¹º¯Êı*/
+	/*ææ„å‡½æ•°*/
 	~HuffTree()
 	{
 		clear(Root);
 	}
-	/*ÓÃÓÚÎö¹¹º¯Êı*/
+	/*ç”¨äºææ„å‡½æ•°*/
 	void clear(HuffNode<E>* root)
 	{
 		if (root == NULL)
@@ -84,20 +84,20 @@ public:
 		delete root;
 	}
 
-	HuffNode<E>* root() { return Root; }	//·µ»Ø¸ù½Úµã
-	int weight() { return Root->weight(); } //·µ»ØÈ¨ÖØ
+	HuffNode<E>* root() { return Root; }	//è¿”å›æ ¹èŠ‚ç‚¹
+	int weight() { return Root->weight(); } //è¿”å›æƒé‡
 
 	/*
-	* ´ÓËùÓĞÊ÷ÖĞÑ¡³öÈ¨ÖØ×îĞ¡µÄÁ½¿Å
-	* tÎªHuffTreeÊı×é,¼´ÔÚ½¨Ê÷¹ı³ÌÖĞµÄĞÎ³ÉµÄÉ­ÁÖ
-	* m1,m2ÓÃÓÚ´æ·ÅÈ¨ÖØ×îĞ¡µÄÁ½¿ÃÊ÷m1Îª×îĞ¡µÄÄÇ¿Å
-	* nÎªHuffTreeÊı×éµÄ´óĞ¡
+	* ä»æ‰€æœ‰æ ‘ä¸­é€‰å‡ºæƒé‡æœ€å°çš„ä¸¤é¢—
+	* tä¸ºHuffTreeæ•°ç»„,å³åœ¨å»ºæ ‘è¿‡ç¨‹ä¸­çš„å½¢æˆçš„æ£®æ—
+	* m1,m2ç”¨äºå­˜æ”¾æƒé‡æœ€å°çš„ä¸¤æ£µæ ‘m1ä¸ºæœ€å°çš„é‚£é¢—
+	* nä¸ºHuffTreeæ•°ç»„çš„å¤§å°
 	*/
 	static void chose_min2(HuffTree<E>** t, int& m1, int& m2, int n)
 	{
 		m1 = 0;
 		m2 = 0;
-		//±éÀúÊı×éÕÒ³ö×îĞ¡µÄÄÇ¿ÃÊ÷
+		//éå†æ•°ç»„æ‰¾å‡ºæœ€å°çš„é‚£æ£µæ ‘
 		int temp = t[0]->weight();
 		for (int i = 0; i < n; i++)
 		{
@@ -107,7 +107,7 @@ public:
 				m1 = i;
 			}
 		}
-		//µÚ¶ş±é±éÀúÕÒ³ö×îĞ¡µÄµÚ¶ş¿Å
+		//ç¬¬äºŒééå†æ‰¾å‡ºæœ€å°çš„ç¬¬äºŒé¢—
 		if (m1 == 0)
 		{
 			temp = t[1]->weight();
@@ -127,23 +127,23 @@ public:
 	}
 
 	/*
-	* ¸ù¾İ×Ö·û¼¯¡¢Æµ¶È¼¯¡¢×Ö·û×ÜÊıÀ´¹¹½¨Huffman±àÂëÊ÷
-	* s: ×Ö·û¼¯£¬¼ÇÂ¼³öÏÖ¹ıµÄ×Ö·û
-	* w: Æµ¶È¼¯£¬¼ÇÂ¼×Ö·û³öÏÖµÄÆµ¶È
-	* n: ¼ÇÂ¼³öÏÖ¹ıµÄ×Ö·ûÊıÁ¿
+	* æ ¹æ®å­—ç¬¦é›†ã€é¢‘åº¦é›†ã€å­—ç¬¦æ€»æ•°æ¥æ„å»ºHuffmanç¼–ç æ ‘
+	* s: å­—ç¬¦é›†ï¼Œè®°å½•å‡ºç°è¿‡çš„å­—ç¬¦
+	* w: é¢‘åº¦é›†ï¼Œè®°å½•å­—ç¬¦å‡ºç°çš„é¢‘åº¦
+	* n: è®°å½•å‡ºç°è¿‡çš„å­—ç¬¦æ•°é‡
 	*/
 	static HuffTree<char>* HuffmanBuild(char* s, int* w, int n)
 	{
 		HuffTree<char>* ttree[NUMBER];
 		HuffTree<char>* temp;
 
-		//±éÀús,w¹¹Ôìn¿ÃHuffTree
+		//éå†s,wæ„é€ næ£µHuffTree
 		for (int i = 0; i < n; i++)
 		{
 			ttree[i] = new HuffTree<char>(s[i], w[i]);
 		}
 
-		//ÖØ¸´ºÏ²¢È¨ÖØ×îĞ¡µÄÁ½¿ÃÊ÷,Ö±ÖÁÖ»Ê£ÏÂÒ»¿ÃÊ÷
+		//é‡å¤åˆå¹¶æƒé‡æœ€å°çš„ä¸¤æ£µæ ‘,ç›´è‡³åªå‰©ä¸‹ä¸€æ£µæ ‘
 		while (n > 1)
 		{
 			n--;
@@ -156,22 +156,22 @@ public:
 				ttree[i] = ttree[i + 1];
 			}
 		}
-		//·µ»ØÊ£ÏÂµÄÄÇ¿ÃÊ÷,¼´½¨ºÃµÄÊ÷
+		//è¿”å›å‰©ä¸‹çš„é‚£æ£µæ ‘,å³å»ºå¥½çš„æ ‘
 		return ttree[0];
 	}
 
 	/*
-	* ±éÀúHuffman±àÂëÊ÷£¬ÔÚ¿ØÖÆÌ¨´òÓ¡Í³¼ÆÓë±àÂëÓ³Éä±í
-	* root: Ê÷µÄ¸ù½Úµã
-	* s: ¶ş½øÖÆ±àÂëĞÅÏ¢×Ö·û´®£¬ÓÉ0ºÍ1×Ö·û¹¹³É£¬ÓÃÓÚµİ¹é
+	* éå†Huffmanç¼–ç æ ‘ï¼Œåœ¨æ§åˆ¶å°æ‰“å°ç»Ÿè®¡ä¸ç¼–ç æ˜ å°„è¡¨
+	* root: æ ‘çš„æ ¹èŠ‚ç‚¹
+	* s: äºŒè¿›åˆ¶ç¼–ç ä¿¡æ¯å­—ç¬¦ä¸²ï¼Œç”±0å’Œ1å­—ç¬¦æ„æˆï¼Œç”¨äºé€’å½’
 	*/
 	static void printHuffmanCode(HuffNode<char>* root, string s = "")
 	{
-		// Îª¿ÕÖ±½Óreturn
+		// ä¸ºç©ºç›´æ¥return
 		if (root == NULL)
 			return;
 		string printStr = "";
-		// ÏÂÃæÊÇ¶ÔÒ»Ğ©ÌØÊâ×Ö·û´®½øĞĞ´¦Àí, ±ÜÃâ´òÓ¡Ê±´òÂÒ¸ñÊ½
+		// ä¸‹é¢æ˜¯å¯¹ä¸€äº›ç‰¹æ®Šå­—ç¬¦ä¸²è¿›è¡Œå¤„ç†, é¿å…æ‰“å°æ—¶æ‰“ä¹±æ ¼å¼
 		if (((LeafNode<char> *)root)->val() == ' ')
 		{
 			printStr = "<space>";
@@ -188,28 +188,28 @@ public:
 		{
 			printStr.push_back(((LeafNode<char> *)root)->val());
 		}
-		// Óöµ½Ò¶×Ó½Úµã¾Í´òÓ¡ÆäÖĞ´¢´æµÄ×Ö·û£¬È¨ÖØ£¬±àÂë½á¹û
+		// é‡åˆ°å¶å­èŠ‚ç‚¹å°±æ‰“å°å…¶ä¸­å‚¨å­˜çš„å­—ç¬¦ï¼Œæƒé‡ï¼Œç¼–ç ç»“æœ
 		if (root->isLeaf())
 		{
 			cout << printStr << "\t" << root->weight() << "\t" << s << endl;
 			return;
 		}
-		//µİ¹é·ÃÎÊ×óÓÒº¢×Ó
+		//é€’å½’è®¿é—®å·¦å³å­©å­
 		HuffTree<char>::printHuffmanCode(((IntlNode<char> *)root)->left(), s + "0");
 		HuffTree<char>::printHuffmanCode(((IntlNode<char> *)root)->right(), s + "1");
 	}
 
-	// µÃµ½±àÂë½á¹û£¬ÓÃÓÚÔÚ»ù±¾ÒªÇóÖĞĞ´Èëµ½ÎÄ¼ş
-	// root: Ê÷µÄ¸ù½Úµã
-	// s: ¶ş½øÖÆ±àÂëĞÅÏ¢×Ö·û´®£¬ÓÉ0ºÍ1×Ö·û¹¹³É£¬ÓÃÓÚµİ¹é
-	// return: ±àÂë½á¹û£¬ÊÇÒ»¸ö³¤×Ö·û´®
+	// å¾—åˆ°ç¼–ç ç»“æœï¼Œç”¨äºåœ¨åŸºæœ¬è¦æ±‚ä¸­å†™å…¥åˆ°æ–‡ä»¶
+	// root: æ ‘çš„æ ¹èŠ‚ç‚¹
+	// s: äºŒè¿›åˆ¶ç¼–ç ä¿¡æ¯å­—ç¬¦ä¸²ï¼Œç”±0å’Œ1å­—ç¬¦æ„æˆï¼Œç”¨äºé€’å½’
+	// return: ç¼–ç ç»“æœï¼Œæ˜¯ä¸€ä¸ªé•¿å­—ç¬¦ä¸²
 	static string huffmanCode(HuffNode<char>* root, string s = "")
 	{
 		if (root == NULL)
 			return "";
 		string ret = "";
 		string printStr = "";
-		// ÏÂÃæÊÇ¶ÔÒ»Ğ©ÌØÊâ×Ö·û´®½øĞĞ´¦Àí, ±ÜÃâ´òÓ¡Ê±´òÂÒ¸ñÊ½
+		// ä¸‹é¢æ˜¯å¯¹ä¸€äº›ç‰¹æ®Šå­—ç¬¦ä¸²è¿›è¡Œå¤„ç†, é¿å…æ‰“å°æ—¶æ‰“ä¹±æ ¼å¼
 		if (((LeafNode<char> *)root)->val() == ' ')
 		{
 			printStr = "<space>";
@@ -240,10 +240,10 @@ public:
 	}
 
 	/*
-	* ÓÃmap´æ´¢huffman±àÂëµÄ½á¹û
-	* root: Ê÷µÄ¸ù½Úµã
-	* code_map: ´Ó×Ö·ûµ½01×Ö·û´®µÄÓ³Éä±í
-	* s: ¶ş½øÖÆ±àÂëĞÅÏ¢×Ö·û´®£¬ÓÉ0ºÍ1×Ö·û¹¹³É£¬ÓÃÓÚµİ¹é
+	* ç”¨mapå­˜å‚¨huffmanç¼–ç çš„ç»“æœ
+	* root: æ ‘çš„æ ¹èŠ‚ç‚¹
+	* code_map: ä»å­—ç¬¦åˆ°01å­—ç¬¦ä¸²çš„æ˜ å°„è¡¨
+	* s: äºŒè¿›åˆ¶ç¼–ç ä¿¡æ¯å­—ç¬¦ä¸²ï¼Œç”±0å’Œ1å­—ç¬¦æ„æˆï¼Œç”¨äºé€’å½’
 	*/
 	static void storeHuffmanCode(HuffNode<char>* root,
 		unordered_map<char, std::string>& code_map, string s = "")

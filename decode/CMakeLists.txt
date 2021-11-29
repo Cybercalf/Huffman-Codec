@@ -1,13 +1,12 @@
 include_directories(${PROJECT_SOURCE_DIR}/file-process)
 
-# ╫╚иЗЁи╣д╤Ч╫Ьжфа╢╫с©Бнд╪Ч╥е╣╫й╧сцcmakeнд╪Ч╪поб╣дlibнд╪Ч╪пжп
+# Е╟├Г■÷Ф┬░Г └Д╨▄Х©⌡Е┬╤И⌠╬Ф▌╔Е╨⌠Ф√┤Д╩╤Ф■╬Е┬╟Д╫©Г■╗cmakeФ√┤Д╩╤Е╓╧Д╦▀Г └libФ√┤Д╩╤Е╓╧Д╦╜
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-# ╦Ь╦цд©б╪об╣дкЫспт╢нд╪ЧфПр╩╦Ж╠ПцШ
+# Г╩≥Х╞╔Г⌡╝Е╫∙Д╦▀Г └Ф┴─Ф°┴Ф╨░Ф√┤Д╩╤Х╣╥Д╦─Д╦╙Е┬╚Е░█
 aux_source_directory(./ DIR_LIB_SRCS)
-# ╫╚╦цд©б╪об╣дкЫспт╢нд╪ЧтзиЗЁи╤Ч╫Ьжфа╢╫с©Бнд╪Чй╠╠╩й╧сц
+# Е╟├Х╞╔Г⌡╝Е╫∙Д╦▀Г └Ф┴─Ф°┴Ф╨░Ф√┤Д╩╤Е°╗Г■÷Ф┬░Д╨▄Х©⌡Е┬╤И⌠╬Ф▌╔Е╨⌠Ф√┤Д╩╤Ф≈╤Х╒╚Д╫©Г■╗
 add_library(decode ${DIR_LIB_SRCS})
 
 target_link_libraries(decode file-process)
 
-target_compile_options(decode PRIVATE -finput-charset=GBK)
 target_compile_options(decode PRIVATE -fexec-charset=GBK)
